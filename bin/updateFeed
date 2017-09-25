@@ -1,0 +1,12 @@
+#!/bin/bash
+
+LINKS=$(mktemp)
+AUDIO_DIR="/html/audio"
+NUMBER_OF_ENTRIES=12 # number of entries to keep + 1
+
+extractLinks > ${LINKS}
+youtube-dl --ignore-errors --batch-file ${LINKS} -o "${AUDIO_DIR}/%(title)s.%(ext)s"
+ls --sort=time ${AUDIO_DIR}/*.mp3 | tail -n +${NUMBER_OF_ENTRIES} | xargs -I{} rm -v "${AUDIO_DIR}/{}"
+
+pushd /html/
+genRSS -d audio/ --host ellinofreneia.sealabs.net -e mp3 -t "Ελληνοφρένεια" -p "Papari" -o audio/feed.rss

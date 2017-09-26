@@ -9,4 +9,9 @@ youtube-dl --ignore-errors --batch-file ${LINKS} -o "${AUDIO_DIR}/%(title)s.%(ex
 ls --sort=time ${AUDIO_DIR}/*.mp3 | tail -n +${NUMBER_OF_ENTRIES} | xargs -I{} rm -v "${AUDIO_DIR}/{}"
 
 pushd /html/
-genRSS -C -d audio/ --host ellinofreneia.sealabs.net -e mp3 -t "Ελληνοφρένεια" -p "Papari" -o audio/feed.rss
+genRSS -C -d audio/ --host ellinofreneia.sealabs.net \
+       -e mp3 \
+       -t "Ελληνοφρένεια" \
+       -p "Ραδιοφωνική Ελληνοφρένεια (ανεπίσημο)" \
+       -i "https://ellinofreneia.sealabs.net/logo.png" \
+       -o audio/feed.rss

@@ -13,8 +13,8 @@ genRSS -C -d audio/ --host ellinofreneia.sealabs.net \
        -e mp3 \
        -t "Ελληνοφρένεια" \
        -p "Ραδιοφωνική Ελληνοφρένεια (ανεπίσημο)" \
-       -i "https://ellinofreneia.sealabs.net/logo.png" \
-       -o audio/feed.rss
+       -i "https://ellinofreneia.sealabs.net/cover.png" \
+       -o feed.rss
 
 # Ping healthchecks
 curl https://hchk.io/92bd7a41-b412-4b9e-ad16-29c754be2822

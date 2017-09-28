@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 LINKS=$(mktemp)
 AUDIO_DIR="/html/audio"

@@ -1,2 +1,3 @@
-html/audio/*.mp3
+html/audio/*
 venv
+html/feed.rss

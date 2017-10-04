@@ -1,0 +1,67 @@
+#!/usr/bin/env python
+# encoding: utf-8
+from __future__ import unicode_literals
+
+import glob
+import os.path
+import urllib
+from collections import namedtuple
+from datetime import datetime
+
+import pytz
+from feedgen.feed import FeedGenerator
+from tinytag import TinyTag
+
+now = datetime.now(pytz.timezone('Europe/Athens'))
+
+Podcast = namedtuple(
+    'Podcast',
+    ('id', 'title', 'author', 'link', 'logo', 'language'))
+
+Podcast.title = 'Ελληνοφρένεια'
+Podcast.author = {
+    'name': 'Τζένη Μπώτση',
+    'email': 'tbotsi@example.com',
+}
+Podcast.base_url = 'https://ellinofreneia.sealabs.net/'
+Podcast.id = Podcast.base_url + 'feed.rss'
+Podcast.logo = Podcast.base_url + 'logo.png'
+Podcast.icon = Podcast.base_url + 'icon.png'
+Podcast.language = 'el'
+Podcast.copyright = 'All rights reversed by http://ellinofreneianet.gr/'
+Podcast.description = 'Ανεπίσημο feed της Ελληνοφρένειας'
+
+fg = FeedGenerator()
+fg.load_extension('podcast')
+fg.id(Podcast.id)
+fg.title(Podcast.title)
+fg.author(Podcast.author)
+
+fg.link(href=Podcast.base_url + 'feed.rss', rel='self')
+fg.logo(Podcast.logo)
+fg.language(Podcast.language)
+fg.icon(Podcast.icon)
+fg.pubDate(now)
+fg.description(Podcast.description)
+fg.copyright(Podcast.copyright)
+fg.podcast.itunes_explicit('no')
+fg.podcast.itunes_owner(Podcast.author['name'], Podcast.author['email'])
+
+files = filter(os.path.isfile, glob.glob('audio/' + "*.mp3"))
+files.sort(key=lambda x: os.path.getmtime(x), reverse=True)
+
+for filename in files:
+    fe = fg.add_entry()
+    tag = TinyTag.get(filename)
+    title = os.path.basename(filename).rsplit('.', 1)[0]
+    filename = urllib.pathname2url(filename.encode('utf-8'))
+    audio_url = Podcast.base_url + filename
+    image_url = Podcast.base_url + filename.rsplit('.', 1)[0] + '.jpg'
+
+    fe.id(audio_url)
+    fe.title(title)
+    fe.enclosure(audio_url, '{}'.format(tag.filesize), 'audio/mpeg')
+    fe.podcast.itunes_duration('{:.0f}'.format(tag.duration))
+    fe.podcast.itunes_image(image_url)
+
+fg.rss_file('podcast.rss', pretty=True)

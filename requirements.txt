@@ -1,3 +1,6 @@
 requests
 youtube-dl
 bs4
+feedgen
+pytz
+tinytag

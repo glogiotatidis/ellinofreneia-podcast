@@ -64,4 +64,4 @@ for filename in files:
     fe.podcast.itunes_duration('{:.0f}'.format(tag.duration))
     fe.podcast.itunes_image(image_url)
 
-fg.rss_file('podcast.rss', pretty=True)
+fg.rss_file('audio/podcast.rss', pretty=True)

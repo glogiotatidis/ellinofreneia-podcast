@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 import glob
 import os.path
 import urllib
+import time
 from collections import namedtuple
 from datetime import datetime
 
@@ -12,7 +13,7 @@ import pytz
 from feedgen.feed import FeedGenerator
 from tinytag import TinyTag
 
-now = datetime.now(pytz.timezone('Europe/Athens'))
+now = datetime.now(pytz.timezone('UTC'))
 
 Podcast = namedtuple(
     'Podcast',
@@ -54,6 +55,7 @@ for filename in files:
     fe = fg.add_entry()
     tag = TinyTag.get(filename)
     title = os.path.basename(filename).rsplit('.', 1)[0]
+    pubdate = time.ctime(os.path.getctime(filename)) + ' UTC'
     filename = urllib.pathname2url(filename.encode('utf-8'))
     audio_url = Podcast.base_url + filename
     image_url = Podcast.base_url + filename.rsplit('.', 1)[0] + '.jpg'
@@ -63,5 +65,6 @@ for filename in files:
     fe.enclosure(audio_url, '{}'.format(tag.filesize), 'audio/mpeg')
     fe.podcast.itunes_duration('{:.0f}'.format(tag.duration))
     fe.podcast.itunes_image(image_url)
+    fe.pubdate(pubdate)
 
 fg.rss_file('audio/podcast.rss', pretty=True)

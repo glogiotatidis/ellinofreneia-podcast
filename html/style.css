@@ -1,0 +1,28 @@
+body {
+M    color: black;
+    font-family: Verdana;
+}
+
+#logo {
+    max-width: 80%;
+}
+
+#content {
+    margin: 0 auto;
+    padding-top: 5%;
+    text-align: center;
+    position: relative;
+    max-width: 90%;
+}
+
+#copyright {
+    position: fixed;
+    bottom: 50px;
+    font-size: 70%;
+    width: 90%;
+}
+
+#tagline {
+    margin-top: 10px;
+    font-size: 110%;
+}

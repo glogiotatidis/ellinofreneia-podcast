@@ -25,7 +25,7 @@ Podcast.author = {
     'email': 'tbotsi@example.com',
 }
 Podcast.base_url = 'https://ellinofreneia.sealabs.net/'
-Podcast.id = Podcast.base_url + 'feed.rss'
+Podcast.id = Podcast.base_url + 'podcast.rss'
 Podcast.logo = Podcast.base_url + 'logo.png'
 Podcast.icon = Podcast.base_url + 'icon.png'
 Podcast.language = 'el'

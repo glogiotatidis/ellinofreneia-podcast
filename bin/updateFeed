@@ -3,7 +3,7 @@ set -e
 
 LINKS=$(mktemp)
 AUDIO_DIR="/html/audio"
-NUMBER_OF_ENTRIES=12 # number of entries to keep + 1
+NUMBER_OF_ENTRIES=24 # number of entries to keep * 2 + 2
 
 extractLinks > ${LINKS}
 youtube-dl --write-thumbnail --ignore-errors --batch-file ${LINKS} -o "${AUDIO_DIR}/%(title)s.%(ext)s"

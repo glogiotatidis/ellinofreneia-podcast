@@ -1,6 +1,6 @@
-requests
-youtube-dl
-bs4
-feedgen
-pytz
-tinytag
+requests==2.18.4
+youtube-dl==2017.10.20
+bs4==0.0.1
+feedgen==0.5.1
+pytz==2017.2
+tinytag==0.18.0

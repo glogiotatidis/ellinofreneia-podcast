@@ -3,4 +3,4 @@ bs4==0.0.1
 feedgen==0.5.1
 pytz==2017.2
 tinytag==0.18.0
-youtube_dl==2018.1.18
+youtube_dl

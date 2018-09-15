@@ -5,7 +5,7 @@ EXPOSE 8000
 
 RUN apt-get update && \
     apt-get install --no-install-recommends -y \
-            youtube-dl python-pip python-setuptools nginx-light locales curl && \
+            ffmpeg youtube-dl python-pip python-setuptools nginx-light locales curl && \
     rm -rf /var/cache/apt/* /var/lib/apt/lists/*
 
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \

@@ -4,9 +4,10 @@ set -e
 LINKS=$(mktemp)
 AUDIO_DIR="/html/audio"
 NUMBER_OF_ENTRIES=24 # number of entries to keep * 2 + 2
+URL="https://soundcloud.com/user-497178008"
+DATE=$(date +%Y%m%d)
 
-extractLinks > ${LINKS}
-youtube-dl --write-thumbnail --ignore-errors --batch-file ${LINKS} -o "${AUDIO_DIR}/%(title)s.%(ext)s"
+youtube-dl --write-thumbnail --ignore-errors ${URL}  --date ${DATE} -o "${AUDIO_DIR}/%(title)s.%(ext)s"
 ls --sort=time ${AUDIO_DIR}/*.{mp3,jpg} | tail -n +${NUMBER_OF_ENTRIES} | xargs -I{} rm -v "{}"
 
 pushd /html/

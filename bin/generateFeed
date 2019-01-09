@@ -21,7 +21,7 @@ Podcast = namedtuple(
 
 Podcast.title = 'Ελληνοφρένεια'
 Podcast.author = {
-    'name': 'Τζένη Μπώτση',
+    'name': 'Τζένη Μπότση',
     'email': 'tbotsi@example.com',
 }
 Podcast.base_url = 'https://ellinofreneia.sealabs.net/'

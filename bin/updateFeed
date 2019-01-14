@@ -8,7 +8,7 @@ URL="https://soundcloud.com/user-497178008"
 DATE=$(date +%Y%m%d)
 
 youtube-dl --audio-format mp3 --write-thumbnail --ignore-errors ${URL}  --date ${DATE} -o "${AUDIO_DIR}/%(title)s.%(ext)s"
-ls --sort=time ${AUDIO_DIR}/*.{mp3,jpg} | tail -n +${NUMBER_OF_ENTRIES} | xargs -0 -I{} rm -v "{}"
+ls --sort=time ${AUDIO_DIR}/*.{mp3,jpg} | tail -n +${NUMBER_OF_ENTRIES} | xargs -d '\n' rm -v
 
 pushd /html/
 generateFeed
